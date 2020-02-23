@@ -24,7 +24,7 @@ class ViewController: UIViewController
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
         } else {
-            print (" error")
+            print ("VC: error")
         }
     }
     

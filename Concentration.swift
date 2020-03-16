@@ -8,42 +8,67 @@
 
 import Foundation
 
-class Concentration
+struct Concentration
 {
-    var cards = [Card] () // Создание пустого массива из структур
+    private(set) var cards = [Card] () // Создание пустого массива из структур
     
-    var indexOfOneAndOnlyFaceUpCard : Int?
+    private var indexOfOneAndOnlyFaceUpCard : Int? {
+        
+        get {
+            return cards.indices.filter {cards[$0].isFaceUp }.oneAndOnly
+//            var foundIndex: Int?
+//            for index in cards.indices {
+//                if cards[index].isFaceUp {
+//                    if foundIndex == nil {
+//                        foundIndex = index
+//                    } else {
+//                        return nil
+//                    }
+//                }
+//            }
+//            return foundIndex
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+        
+    }
     
-    func chooseCard (at index: Int) {
+    
+     mutating func chooseCard (at index: Int) {
+        assert(cards.indices.contains(index), "Conc.chooseCard(at: \(index)): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard , matchIndex != index {
                 // check card
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index] {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
                 
             } else {
-                // 0 or 2
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
             
         }
         
     }
-    init(numberOfPairsCard: Int){
+    init(numberOfPairsCards: Int){
+        assert (numberOfPairsCards > 0 , "Cons.init(\(numberOfPairsCards)) : you must have at least one pair of cards")
         // Заполняю пустой массив в соответствии с кол-вом карт
-        for _ in 1...numberOfPairsCard {
+        for _ in 1...numberOfPairsCards {
             let card = Card()
             cards += [card, card]
         }
         // MART: CHAPTER 1
         cards = cards.shuffled()
+    }
+}
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
     }
 }

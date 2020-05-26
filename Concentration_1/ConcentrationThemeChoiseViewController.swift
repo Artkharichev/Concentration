@@ -1,6 +1,6 @@
 //
 //  ConcentrationThemeChoiseViewController.swift
-//  Concentration_1
+//  Concentration
 //
 //  Created by Артём Харичев on 13.03.2020.
 //  Copyright © 2020 Артём Харичев. All rights reserved.
@@ -11,14 +11,15 @@ import UIKit
 class ConcentrationThemeChoiseViewController: UIViewController, UISplitViewControllerDelegate {
 
     let themes = [
-        "Sports"   : "⚽️🏀🏈⚾️🏓⛸🥌🎱🏑⛷🥊",
-        "Animals"  : "🦜🦄🐙🐇🐩🦆🐅🐊🐋🐪🦓",
+        "Sports"   : "⚽️🏀🏈⚾️🏓⛸🥌🎱🏑⛷🥊🏐",
+        "Animals"  : "🦜🦄🐙🐇🐩🦆🐅🐊🐋🐪🦓🐒",
         "Faces"    : "🐭🥰😻💩😡😀🦊👮🏻‍♂️💂🏻🤦🏻‍♂️🤠🥴",
         "Halloween": "👻🎃🦅👹🕸🕷💀🐺🐞🧟‍♂️🏴‍☠️🧛🏻‍♂️",
     
     ]
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         splitViewController?.delegate = self
     }
     

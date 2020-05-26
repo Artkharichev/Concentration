@@ -1,6 +1,6 @@
 //
 //  Card.swift
-//  Concentration_1
+//  Concentration
 //
 //  Created by Артём Харичев on 18.02.2020.
 //  Copyright © 2020 Артём Харичев. All rights reserved.
